@@ -64,7 +64,7 @@ if __name__ == "__main__":
         AdsHandler(),
         accelerator="gpu",                     
         devices=torch.cuda.device_count() or 1,
-        workers_per_device=1 
+        workers_per_device=2
     )
 
     # server = ls.LitServer(
