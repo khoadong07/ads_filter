@@ -42,8 +42,17 @@ class AdsHandler(ls.LitAPI):
     def predict(self, request: dict) -> dict:
         merged = dict(request)
         try:
-            content = merged.get("content", "")
+            # content = merged.get("content", "")
+            buzz_type = merged.get("type", "")
+            if buzz_type in ["fbGroupTopic", "fbPageTopic", "fbUserTopic" ]:
+                content = merged.get("content", "")
+                print("Content only")
+            else:
+                content = merged.get("title", "") + " " + merged.get("description", "") + " " + merged.get("content", "")
+                print("Title + Description + Content")
+
             is_ads = predict_ads(content)
+
             if is_ads:
                 merged["label"] = "Rao vặt"
                 merged["label_id"] = "68898a3c16a3634d83338269"
@@ -73,4 +82,4 @@ if __name__ == "__main__":
     #     devices=1,
     #     workers_per_device=1
     # )
-    server.run(host="0.0.0.0", port=5005)
+    server.run(host="0.0.0.0", port=5005, num_api_servers=2, log_level="info")
