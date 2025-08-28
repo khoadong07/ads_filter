@@ -82,4 +82,4 @@ if __name__ == "__main__":
     #     devices=1,
     #     workers_per_device=1
     # )
-    server.run(host="0.0.0.0", port=5005, num_api_servers=2, log_level="info")
+    server.run(host="0.0.0.0", port=5005, num_api_servers=2)
